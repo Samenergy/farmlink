@@ -11,7 +11,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   final List<Map<String, String>> welcomeData = [
     {
-      'title': 'Welcome to Farmlink!',
+      'title': 'Welcome to ',
       'description':
           'We’re connecting consumers with local farmers to reduce post-harvest losses. Let’s get started!',
       'buttonText': 'Next',
@@ -95,42 +95,62 @@ class WelcomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
-            // Title at the top
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 35.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF00af88)
-              ),
-              textAlign: TextAlign.center,
+            SizedBox(height: screenHeight * 0.05),
+            // Row for "Welcome to" and Farmlink image
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.08, // Font size dynamic to screen width
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF00af88),
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2, // Restrict to two lines if needed
+                  ),
+                ),
+                if (currentPage == 0) SizedBox(width: 0),
+                if (currentPage == 0)
+                  Image.asset(
+                    'assets/logo1.png',
+                    height: screenHeight * 0.2, // Proportional height
+                    fit: BoxFit.contain,
+                  ),
+              ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.05),
             // Image in the center
             Expanded(
               child: Image.asset(
                 imagePath,
-                height: 250,
+                fit: BoxFit.contain, // Ensure the image fits well
+                width: screenWidth, // Ensure the image fits the screen width
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.05),
             // Description below the image
             Text(
               description,
               style: TextStyle(
-                fontSize: 25.0,
+                fontSize: screenWidth * 0.05, // Font size dynamic to screen width
                 color: Colors.black,
               ),
               textAlign: TextAlign.center,
+              maxLines: 3, // Restrict description to three lines
             ),
-            SizedBox(height: 80),
+            SizedBox(height: screenHeight * 0.05),
             // Pagination dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -148,23 +168,26 @@ class WelcomeContent extends StatelessWidget {
                 );
               }),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.03),
             // Button at the bottom
             ElevatedButton(
               onPressed: onPressed,
               child: Text(
-              buttonText,
-              style: TextStyle(color: Colors.white, fontSize:25.0), // Set text color to white
-            ),
+                buttonText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenWidth * 0.06, // Dynamic font size for the button text
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00af88),
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: Size(double.infinity, screenHeight * 0.07), // Dynamic button height
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ),
-            SizedBox(height: 80),
+            SizedBox(height: screenHeight * 0.05),
           ],
         ),
       ),
