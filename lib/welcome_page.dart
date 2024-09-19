@@ -15,28 +15,28 @@ class _WelcomePageState extends State<WelcomePage> {
       'description':
           'We’re connecting consumers with local farmers to reduce post-harvest losses. Let’s get started!',
       'buttonText': 'Next',
-      'imagePath': 'assets/land.jpg' // Add your vector image here
+      'imagePath': 'assets/hand.png'
     },
     {
       'title': 'Discover Fresh Produce',
       'description':
           'Browse real-time listings of fresh products from farmers across Rwanda!',
       'buttonText': 'Next',
-      'imagePath': 'assets/farm.png' // Add your vector image here
+      'imagePath': 'assets/farm.png'
     },
     {
       'title': 'Support Local Farmers',
       'description':
           'By purchasing through Farmlink, you’re directly supporting Rwandan farmers!',
       'buttonText': 'Next',
-      'imagePath': 'assets/Frame.png' // Add your vector image here
+      'imagePath': 'assets/Frame.png'
     },
     {
       'title': 'Reduce Waste & Help the Planet',
       'description':
           'Together, we’re building a sustainable future. Make a positive impact today!',
       'buttonText': 'Get Started!',
-      'imagePath': 'assets/Frame (1).png' // Add your vector image here
+      'imagePath': 'assets/Frame (1).png'
     },
   ];
 
@@ -48,12 +48,9 @@ class _WelcomePageState extends State<WelcomePage> {
             duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
       });
     } else {
-      // Navigate to home or other section after onboarding
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                HomePage()), // Replace with your app's main page
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     }
   }
@@ -63,14 +60,15 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: PageView.builder(
         controller: _pageController,
-        physics:
-            NeverScrollableScrollPhysics(), // Disable swipe to control the flow by buttons
+        physics: NeverScrollableScrollPhysics(), // Disable swipe
         itemCount: welcomeData.length,
         itemBuilder: (context, index) => WelcomeContent(
           title: welcomeData[index]['title']!,
           description: welcomeData[index]['description']!,
           buttonText: welcomeData[index]['buttonText']!,
           imagePath: welcomeData[index]['imagePath']!,
+          currentPage: currentPage,
+          totalPages: welcomeData.length,
           onPressed: nextPage,
         ),
       ),
@@ -81,6 +79,8 @@ class _WelcomePageState extends State<WelcomePage> {
 class WelcomeContent extends StatelessWidget {
   final String title, description, buttonText, imagePath;
   final VoidCallback onPressed;
+  final int currentPage;
+  final int totalPages;
 
   const WelcomeContent({
     Key? key,
@@ -89,50 +89,84 @@ class WelcomeContent extends StatelessWidget {
     required this.buttonText,
     required this.imagePath,
     required this.onPressed,
+    required this.currentPage,
+    required this.totalPages,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF00af88), // Align with your primary color
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 100),
+            // Title at the top
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 35.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF00af88)
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 20),
-          Image.asset(
-            imagePath,
-            height: 250, // Placeholder for your vector images
-          ),
-          SizedBox(height: 20),
-          Text(
-            description,
-            style: TextStyle(fontSize: 16.0, color: const Color(0xFF000000)),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00af88), // Button color
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            SizedBox(height: 20),
+            // Image in the center
+            Expanded(
+              child: Image.asset(
+                imagePath,
+                height: 250,
+              ),
             ),
-            child: Text(
+            SizedBox(height: 20),
+            // Description below the image
+            Text(
+              description,
+              style: TextStyle(
+                fontSize: 25.0,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 80),
+            // Pagination dots
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(totalPages, (index) {
+                return Container(
+                  width: 8,
+                  height: 8,
+                  margin: EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: index == currentPage
+                        ? Colors.green
+                        : Colors.grey.shade300,
+                  ),
+                );
+              }),
+            ),
+            SizedBox(height: 20),
+            // Button at the bottom
+            ElevatedButton(
+              onPressed: onPressed,
+              child: Text(
               buttonText,
-              style: TextStyle(color: Colors.white), // Set text color to white
+              style: TextStyle(color: Colors.white, fontSize:25.0), // Set text color to white
             ),
-          ),
-          SizedBox(height: 40),
-        ],
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00af88),
+                minimumSize: Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            SizedBox(height: 80),
+          ],
+        ),
       ),
     );
   }

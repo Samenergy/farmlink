@@ -54,7 +54,7 @@ flutter:
   assets:
     - assets/farm.png
     - assets/Frame.png
-    - assets/land.jpg
+    - assets/hand.png
     - assets/Frame (1).png
 
   # The following line ensures that the Material Icons font is
