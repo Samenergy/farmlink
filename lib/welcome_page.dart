@@ -41,19 +41,17 @@ class _WelcomePageState extends State<WelcomePage> {
   ];
 
   void nextPage() {
-    if (currentPage < welcomeData.length - 1) {
-      setState(() {
-        currentPage++;
-        _pageController.animateToPage(currentPage,
-            duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-      });
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    }
+  if (currentPage < welcomeData.length - 1) {
+    setState(() {
+      currentPage++;
+      _pageController.animateToPage(currentPage,
+          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    });
+  } else {
+    Navigator.pushReplacementNamed(context, '/home');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +103,6 @@ class WelcomeContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: screenHeight * 0.05),
-            // Row for "Welcome to" and Farmlink image
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -113,45 +110,42 @@ class WelcomeContent extends StatelessWidget {
                   child: Text(
                     title,
                     style: TextStyle(
-                      fontSize: screenWidth * 0.08, // Font size dynamic to screen width
+                      fontSize: screenWidth * 0.08,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF00af88),
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 2, // Restrict to two lines if needed
+                    maxLines: 2,
                   ),
                 ),
                 if (currentPage == 0) SizedBox(width: 0),
                 if (currentPage == 0)
                   Image.asset(
                     'assets/logo1.png',
-                    height: screenHeight * 0.2, // Proportional height
+                    height: screenHeight * 0.2,
                     fit: BoxFit.contain,
                   ),
               ],
             ),
             SizedBox(height: screenHeight * 0.05),
-            // Image in the center
             Expanded(
               child: Image.asset(
                 imagePath,
-                fit: BoxFit.contain, // Ensure the image fits well
-                width: screenWidth, // Ensure the image fits the screen width
+                fit: BoxFit.contain,
+                width: screenWidth,
               ),
             ),
             SizedBox(height: screenHeight * 0.05),
-            // Description below the image
             Text(
               description,
               style: TextStyle(
-                fontSize: screenWidth * 0.05, // Font size dynamic to screen width
+                fontSize: screenWidth * 0.05,
                 color: Colors.black,
               ),
               textAlign: TextAlign.center,
-              maxLines: 3, // Restrict description to three lines
+              maxLines: 3,
             ),
             SizedBox(height: screenHeight * 0.05),
-            // Pagination dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(totalPages, (index) {
@@ -169,19 +163,18 @@ class WelcomeContent extends StatelessWidget {
               }),
             ),
             SizedBox(height: screenHeight * 0.03),
-            // Button at the bottom
             ElevatedButton(
               onPressed: onPressed,
               child: Text(
                 buttonText,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: screenWidth * 0.06, // Dynamic font size for the button text
+                  fontSize: screenWidth * 0.06,
                 ),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00af88),
-                minimumSize: Size(double.infinity, screenHeight * 0.07), // Dynamic button height
+                minimumSize: Size(double.infinity, screenHeight * 0.07),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -191,16 +184,6 @@ class WelcomeContent extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Farmlink Home')),
-      body: Center(child: Text('Welcome to the Home Page!')),
     );
   }
 }
