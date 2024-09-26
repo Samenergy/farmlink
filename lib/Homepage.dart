@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'custom_navigation_bar.dart'; // Import the CustomNavigationBar
+import 'all_products_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -108,7 +109,6 @@ class HomeContent extends StatelessWidget {
       icon: Icons.local_florist, // Icon for Vegetables
       label: 'Vegetables',
       onTap: () {
-        // Action: Navigate to vegetables page or category
       },
     ),
     HomeActionButton(
@@ -135,13 +135,14 @@ class HomeContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Featured Products',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
+  'Featured Products',
+  style: TextStyle(
+    fontSize: 22.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.black87,
+  ),
+),
+SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
                     // Navigate to the complete featured products page
