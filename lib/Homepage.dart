@@ -3,6 +3,8 @@ import 'custom_navigation_bar.dart'; // Import the CustomNavigationBar
 import 'all_products_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -11,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   // List of pages to switch between when an item is selected
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     HomeContent(),
     BrowseProductsPage(),
     ProfilePage(),
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               // Navigate to the cart page
             },
@@ -38,7 +40,8 @@ class _HomePageState extends State<HomePage> {
         ],
         backgroundColor: const Color(0xFF00af88),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex), // Body changes based on selected navbar item
+      body: _widgetOptions.elementAt(
+          _selectedIndex), // Body changes based on selected navbar item
       bottomNavigationBar: CustomNavigationBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
@@ -49,6 +52,8 @@ class _HomePageState extends State<HomePage> {
 
 // Updated HomeContent Widget
 class HomeContent extends StatelessWidget {
+  const HomeContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -61,13 +66,13 @@ class HomeContent extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search for products...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Welcome Banner
             Container(
@@ -77,7 +82,7 @@ class HomeContent extends StatelessWidget {
                 color: const Color(0xFF00af88), // Primary color
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -99,65 +104,70 @@ class HomeContent extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // Action Buttons Section
             Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  children: [
-    HomeActionButton(
-      icon: Icons.local_florist, // Icon for Vegetables
-      label: 'Vegetables',
-      onTap: () {
-      },
-    ),
-    HomeActionButton(
-      icon: Icons.apple, // Use another available icon for Fruits
-      label: 'Fruits',
-      onTap: () {
-        // Action: Navigate to fruits page or category
-      },
-    ),
-    HomeActionButton(
-      icon: Icons.category, // Icon for Others
-      label: 'Others',
-      onTap: () {
-        // Action: Navigate to other products or categories page
-      },
-    ),
-  ],
-),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                HomeActionButton(
+                  icon: Icons.local_florist, // Icon for Vegetables
+                  label: 'Vegetables',
+                  onTap: () {},
+                ),
+                HomeActionButton(
+                  icon: Icons.apple, // Use another available icon for Fruits
+                  label: 'Fruits',
+                  onTap: () {
+                    // Action: Navigate to fruits page or category
+                  },
+                ),
+                HomeActionButton(
+                  icon: Icons.category, // Icon for Others
+                  label: 'Others',
+                  onTap: () {
+                    // Action: Navigate to other products or categories page
+                  },
+                ),
+              ],
+            ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // Featured Products Section with View All Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-  'Featured Products',
-  style: TextStyle(
-    fontSize: 22.0,
-    fontWeight: FontWeight.bold,
-    color: Colors.black87,
-  ),
-),
-SizedBox(height: 10),
+                const Text(
+                  'Featured Products',
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    // Navigate to the complete featured products page
+                    // Navigate to AllProductsPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllProductsPage()),
+                    );
                   },
-                  child: Text(
+                  child: const Text(
                     'View All',
                     style: TextStyle(
-                      color: const Color(0xFF00af88),
+                      color: Color(0xFF00af88),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            SingleChildScrollView(
+
+            const SizedBox(height: 10),
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -179,10 +189,10 @@ SizedBox(height: 10),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // Farmlink Picks Section for discounts or offers
-            Text(
+            const Text(
               'Farmlink Picks',
               style: TextStyle(
                 fontSize: 22.0,
@@ -190,8 +200,8 @@ SizedBox(height: 10),
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 10),
-            SingleChildScrollView(
+            const SizedBox(height: 10),
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -213,10 +223,10 @@ SizedBox(height: 10),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // Sustainability Section
-            Text(
+            const Text(
               'Sustainability Tips',
               style: TextStyle(
                 fontSize: 22.0,
@@ -224,7 +234,7 @@ SizedBox(height: 10),
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Learn how Farmlink is helping reduce waste and support sustainable farming practices.',
               style: TextStyle(
@@ -232,7 +242,7 @@ SizedBox(height: 10),
                 color: Colors.grey[700],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 // Navigate to sustainability page
@@ -240,7 +250,7 @@ SizedBox(height: 10),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00af88),
               ),
-              child: Text('Learn More'),
+              child: const Text('Learn More'),
             ),
           ],
         ),
@@ -251,9 +261,11 @@ SizedBox(height: 10),
 
 // Placeholder widget for Browse Products Page
 class BrowseProductsPage extends StatelessWidget {
+  const BrowseProductsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Browse Products Page',
         style: TextStyle(fontSize: 24),
@@ -264,9 +276,11 @@ class BrowseProductsPage extends StatelessWidget {
 
 // Placeholder widget for Profile Page
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Profile Page',
         style: TextStyle(fontSize: 24),
@@ -282,27 +296,28 @@ class HomeActionButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const HomeActionButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap, // Fix: Add a comma after onTap
-      child: Column( // Fix: Missing colon before Column
+      child: Column(
+        // Fix: Missing colon before Column
         children: [
           CircleAvatar(
             radius: 30.0,
             backgroundColor: const Color(0xFF00af88),
             child: Icon(icon, color: Colors.white, size: 30.0),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
             ),
@@ -313,7 +328,6 @@ class HomeActionButton extends StatelessWidget {
   }
 }
 
-
 // Custom ProductCard Widget
 class ProductCard extends StatelessWidget {
   final String productName;
@@ -321,11 +335,11 @@ class ProductCard extends StatelessWidget {
   final String price;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.productName,
     required this.imagePath,
     required this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -340,7 +354,7 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
             child: Image.asset(
               imagePath,
               fit: BoxFit.cover,
@@ -352,7 +366,7 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               productName,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
@@ -362,7 +376,7 @@ class ProductCard extends StatelessWidget {
               style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );

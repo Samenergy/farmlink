@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
@@ -45,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
     setState(() {
       currentPage++;
       _pageController.animateToPage(currentPage,
-          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
   } else {
     Navigator.pushReplacementNamed(context, '/home');
@@ -58,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: PageView.builder(
         controller: _pageController,
-        physics: NeverScrollableScrollPhysics(), // Disable swipe
+        physics: const NeverScrollableScrollPhysics(), // Disable swipe
         itemCount: welcomeData.length,
         itemBuilder: (context, index) => WelcomeContent(
           title: welcomeData[index]['title']!,
@@ -81,7 +83,7 @@ class WelcomeContent extends StatelessWidget {
   final int totalPages;
 
   const WelcomeContent({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.buttonText,
@@ -89,7 +91,7 @@ class WelcomeContent extends StatelessWidget {
     required this.onPressed,
     required this.currentPage,
     required this.totalPages,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -112,13 +114,13 @@ class WelcomeContent extends StatelessWidget {
                     style: TextStyle(
                       fontSize: screenWidth * 0.08,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF00af88),
+                      color: const Color(0xFF00af88),
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                   ),
                 ),
-                if (currentPage == 0) SizedBox(width: 0),
+                if (currentPage == 0) const SizedBox(width: 0),
                 if (currentPage == 0)
                   Image.asset(
                     'assets/logo1.png',
@@ -152,7 +154,7 @@ class WelcomeContent extends StatelessWidget {
                 return Container(
                   width: 8,
                   height: 8,
-                  margin: EdgeInsets.symmetric(horizontal: 4),
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: index == currentPage
@@ -165,18 +167,18 @@ class WelcomeContent extends StatelessWidget {
             SizedBox(height: screenHeight * 0.03),
             ElevatedButton(
               onPressed: onPressed,
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: screenWidth * 0.06,
-                ),
-              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00af88),
                 minimumSize: Size(double.infinity, screenHeight * 0.07),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                buttonText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenWidth * 0.06,
                 ),
               ),
             ),

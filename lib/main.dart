@@ -5,6 +5,8 @@ import 'Homepage.dart'; // Import the Home Page
 void main() => runApp(FarmlinkApp());
 
 class FarmlinkApp extends StatelessWidget {
+  const FarmlinkApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
