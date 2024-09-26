@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class AllProductsPage extends StatelessWidget {
-  // List of fruits with their corresponding images
-  final List<Map<String, String>> fruits = [
-    {'name': 'Apple', 'image': 'assets/images/apple.png'},
-    {'name': 'Banana', 'image': 'assets/images/banana.png'},
-    {'name': 'Orange', 'image': 'assets/images/orange.png'},
-    {'name': 'Mango', 'image': 'assets/images/mango.png'},
-    {'name': 'Grapes', 'image': 'assets/images/grapes.png'},
-    {'name': 'Pineapple', 'image': 'assets/images/pineapple.png'},
-    {'name': 'Strawberry', 'image': 'assets/images/strawberry.png'},
-    {'name': 'Watermelon', 'image': 'assets/images/watermelon.png'},
-    {'name': 'Blueberry', 'image': 'assets/images/blueberry.png'},
-    {'name': 'Kiwi', 'image': 'assets/images/kiwi.png'},
+  // List of fruits and vegetables with their corresponding images
+  final List<Map<String, String>> products = [
+    {'name': 'Apple', 'image': 'assets/apples.png'},
+    {'name': 'Banana', 'image': 'assets/banana.png'},
+    {'name': 'Orange', 'image': 'assets/orange.png'},
+    {'name': 'Mango', 'image': 'assets/mango.png'},
+    {'name': 'Grapes', 'image': 'assets/grapes.png'},
+    {'name': 'Tomatoes', 'image': 'assets/tomatoes.png'},
+    {'name': 'Carrots', 'image': 'assets/carrots.png'},
+    {'name': 'Potatoes', 'image': 'assets/potatoes.png'},
+    {'name': 'Spinach', 'image': 'assets/spinach.png'},
+    {'name': 'Avocados', 'image': 'assets/avocados.png'},
   ];
 
-  const AllProductsPage({super.key});
+  AllProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,11 @@ class AllProductsPage extends StatelessWidget {
             crossAxisSpacing: 16.0,
             mainAxisSpacing: 16.0,
           ),
-          itemCount: fruits.length, // Use the length of the fruits list
+          itemCount: products.length, // Use the length of the products list
           itemBuilder: (context, index) {
             return ProductCard(
-              productName: fruits[index]['name']!,
-              imagePath: fruits[index]['image']!, // Use the image path from the list
+              productName: products[index]['name']!,
+              imagePath: products[index]['image']!, // Use the image path from the list
               price: 'RWF ${(index + 1) * 1000}/kg', // Placeholder price
             );
           },
@@ -46,7 +46,7 @@ class AllProductsPage extends StatelessWidget {
   }
 }
 
-// Reuse the ProductCard widget if already defined elsewhere
+// ProductCard widget to display individual products
 class ProductCard extends StatelessWidget {
   final String productName;
   final String imagePath;

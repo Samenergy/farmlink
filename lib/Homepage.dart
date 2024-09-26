@@ -14,9 +14,9 @@ class _HomePageState extends State<HomePage> {
 
   // List of pages to switch between when an item is selected
   static final List<Widget> _widgetOptions = <Widget>[
-    HomeContent(),
-    BrowseProductsPage(),
-    ProfilePage(),
+    const HomeContent(),
+    const BrowseProductsPage(),
+    const ProfilePage(),
   ];
 
   // Method to handle navigation tap
@@ -250,7 +250,12 @@ class HomeContent extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00af88),
               ),
-              child: const Text('Learn More'),
+              child: const Text(
+                'Learn more',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
             ),
           ],
         ),
@@ -354,7 +359,8 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(10.0)),
             child: Image.asset(
               imagePath,
               fit: BoxFit.cover,
@@ -366,7 +372,8 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               productName,
-              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(

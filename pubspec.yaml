@@ -63,10 +63,10 @@ flutter:
     - assets/apples.png
     - assets/spinach.png
     - assets/avocados.png
-    - assets/images/banana.png
-    - assets/images/orange.png
-    - assets/images/mango.png
-    - assets/images/grapes.png
+    - assets/banana.png
+    - assets/orange.png
+    - assets/mango.png
+    - assets/grapes.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
